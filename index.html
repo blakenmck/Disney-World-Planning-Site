@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom YouTube Playlist</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tickets, Reservations, and Add-Ons</h1>
+    <ol>
+        <li><button onclick="loadVideo('PxNLgcjBcuw', 819, 991)">1. Overview of Ticketing</button></li>
+        <li><button onclick="loadVideo('vfKnGY3o6b4', 82, 181)">2. Buying Tickets Online</button></li>
+        <li><button onclick="loadVideo('vfKnGY3o6b4', 384, 470)">3. Park Pass Reservations</button></li>
+        <li><button onclick="loadVideo('PxNLgcjBcuw', 751, 819)">4. Accessing Your Tickets</button></li>
+    </ol>
+
+    <h2>A Deeper Dive</h2>
+    <ol start="5">
+        <li><button onclick="loadVideo('wnofCRC-82U', 800, 920)">5. Memory Maker (Photos)</button></li>
+        <li><button onclick="loadVideo('wnofCRC-82U', 640, 798)">6. Park Hopper Option</button></li>
+    </ol>
+
+    <div id="ytplayer"></div>
+    <a href="https://www.youtube.com/@DFBGuide" target="_blank"><button>DFB Guide YouTube Channel</button></a>
+
+    <script>
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: '360',
+                width: '640',
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                player.stopVideo();
+            }
+        }
+
+        function loadVideo(videoId, start, end) {
+            player.loadVideoById({
+                videoId: videoId,
+                startSeconds: start,
+                endSeconds: end
+            });
+        }
+    </script>
+</body>
+</html>
